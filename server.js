@@ -1,5 +1,6 @@
 var express = require('express')
   , store = require('./lib/store')
+  , _ = require('lodash')
 
 var app = express()
 
@@ -30,6 +31,33 @@ app.get('/unemployment/current/diff', function(req, res){
     }
 
     res.send(diff + '%')
+  })
+})
+
+app.get('/unemployment/history', function(req, res){
+  store.unemployment.history(function (err, data) {
+    if (err) {
+      return res.status(500).send(err.toString())
+    }
+
+    var formatted = _.map(data, function (item) {
+      return {
+        title: item.date.format('MMM YYYY'),
+        value: item.value
+      }
+    })
+
+    res.json({
+      graph: {
+        title: 'Unemployment Rate',
+        datasequences: [
+          {
+            title: 'Unemployment Rate',
+            datapoints: formatted
+          }
+        ]
+      }
+    })
   })
 })
 
