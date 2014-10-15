@@ -1,10 +1,10 @@
 var express = require('express')
-  , u = require('./lib/unemployment')
+  , store = require('./lib/store')
 
 var app = express()
 
 app.get('/unemployment/current/speedometer', function(req, res){
-  u.current(function (err, data) {
+  store.unemployment.current(function (err, data) {
     if (err) {
       return res.status(500).send(err.toString())
     }
@@ -19,7 +19,7 @@ app.get('/unemployment/current/speedometer', function(req, res){
 })
 
 app.get('/unemployment/current/diff', function(req, res){
-  u.current(function (err, data) {
+  store.unemployment.current(function (err, data) {
     if (err) {
       return res.status(500).send(err.toString())
     }
@@ -33,4 +33,8 @@ app.get('/unemployment/current/diff', function(req, res){
   })
 })
 
-app.listen(3000)
+store.start()
+
+var port = process.env.PORT || 5000
+app.listen(port)
+console.log('Listening on port ' + port)
