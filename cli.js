@@ -22,12 +22,12 @@ parse(instream, function (err, data) {
   var results = unemployment(data)
   dashify.speedometer(fileout('unemployment-speedometer.json'), results, { datatype: 'percent', start: 2, end: 20 })
   dashify.diff(fileout('unemployment-diff.txt'), results, { datatype: 'percent' })
-  dashify.history(fileout('unemployment-history.json'), results, { datatype: 'percent' })
+  dashify.history(fileout('unemployment-history.json'), results, { datatype: 'percent', title: 'Unemployment Rate' })
 
   results = cpi(data)
   dashify.speedometer(fileout('cpi-speedometer.json'), results, { start: 180, end: 250 })
   dashify.diff(fileout('cpi-diff.txt'), results)
-  dashify.history(fileout('cpi-history.json'), results)
+  dashify.history(fileout('cpi-history.json'), results, { title: 'Consumer Price Index'})
 })
 
 function fileout (name) {
