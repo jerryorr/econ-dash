@@ -60,16 +60,16 @@ var unemploymentConfig = {
   diff: {
     widget: widgets.unemployment.diff,
     producer: dashify.diff,
+    options: { datatype: 'percent' }
+  },
+  speedometer: {
+    widget: widgets.unemployment.speedometer,
+    producer: dashify.speedometer,
     options: {
       datatype: 'percent',
       start: 2,
       end: 20
     }
-  },
-  speedometer: {
-    widget: widgets.unemployment.speedometer,
-    producer: dashify.speedometer,
-    options: { datatype: 'percent' }
   },
   history: {
     widget: widgets.unemployment.history,
@@ -82,15 +82,15 @@ var unemploymentConfig = {
 var cpiConfig = {
   diff: {
     widget: widgets.cpi.diff,
-    producer: dashify.diff,
-    options: {
-      start: 180,
-      end: 250
-    }
+    producer: dashify.diff
   },
   speedometer: {
     widget: widgets.cpi.speedometer,
     producer: dashify.speedometer,
+    options: {
+      start: 180,
+      end: 250
+    }
   },
   history: {
     widget: widgets.cpi.history,
